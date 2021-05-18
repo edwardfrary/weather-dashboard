@@ -1,6 +1,13 @@
 var cityNameAPI = "";
 var country = "";
 
+//obtains and formats the current date
+var currentDate = new Date();
+var d = String(currentDate.getDate()).padStart(2, '0');
+var m = String(currentDate.getMonth() + 1).padStart(2, '0');
+var y = currentDate.getFullYear();
+currentDate = m + '/' + d + '/' + y;
+
 //Event handler for clicking the search button
 $("#searchbtn").on("click", function () {
     apiSearch();
@@ -96,12 +103,12 @@ function renderData(data) {
 
     //now insert the city name and country
     var cityName = $("<h2>")
-        .text("City of: " + cityNameAPI + ", " + country);
+        .text("City of: " + cityNameAPI + ", " + country + " (" + currentDate + ")");
     $("#cityname-header").append(cityName);
 
     //TEMPERATURE
     var temperature = $("<span>")
-        .text("Current temp: " + data.current.temp +"°F");
+        .text("Current temp: " + data.current.temp + "°F");
     $("#temperature").append(temperature);
 
     //WINDSPEED
