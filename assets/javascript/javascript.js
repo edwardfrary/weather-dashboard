@@ -48,6 +48,8 @@ function apiBtn(savedCity) {
 
 //function to save the city name as a clickable button and display it on index.html
 function saveCity(cityName) {
+
+
     var savedBtnFunction = "apiBtn('" + cityName + "');";
     var savedCityEl = $("<button>")
         .addClass("btn-secondary bg-darkblue text-light shadow w-100")
@@ -57,9 +59,11 @@ function saveCity(cityName) {
 };
 
 //function to render the relevent weather data to index.html
-function renderData(data){
+function renderData(data) {
     console.log(data);
+    //first clear the previous elements from any other searches
+    $("#cityname-header").empty();
     var cityName = $("<h2>")
-    .text("City of: " + data.name + ", " + data.sys.country);
-    $("#citynameheader").append(cityName);
+        .text("City of: " + data.name + ", " + data.sys.country);
+    $("#cityname-header").append(cityName);
 };
