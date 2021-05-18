@@ -48,8 +48,6 @@ function apiBtn(savedCity) {
 
 //function to save the city name as a clickable button and display it on index.html
 function saveCity(cityName) {
-
-
     var savedBtnFunction = "apiBtn('" + cityName + "');";
     var savedCityEl = $("<button>")
         .addClass("btn-secondary bg-darkblue text-light shadow w-100")
