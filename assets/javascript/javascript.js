@@ -1,13 +1,6 @@
 var cityNameAPI = "";
 var country = "";
 
-//obtains and formats the current date
-var currentDate = new Date();
-var d = String(currentDate.getDate()).padStart(2, '0');
-var m = String(currentDate.getMonth() + 1).padStart(2, '0');
-var y = currentDate.getFullYear();
-currentDate = m + '/' + d + '/' + y;
-
 //Event handler for clicking the search button
 $("#searchbtn").on("click", function () {
     apiSearch();
@@ -94,16 +87,31 @@ function saveCity(cityName) {
     $("#previous-searches").append(savedCityEl);
 };
 
-//function to render the relevent weather data to index.html
+//gets the current date and add days to the current date if needed before returning the value
+function dateHandler(days) {
+    var result = new Date();
+    result.setDate(result.getDate() + days);
+
+    //date formatting
+    var d = String(result.getDate()).padStart(2, '0');
+    var m = String(result.getMonth() + 1).padStart(2, '0');
+    var y = result.getFullYear();
+
+    result = m + '/' + d + '/' + y;
+
+    return result;
+};
+
+//function to render the current and predicted weather data to index.html
 function renderData(data) {
     console.log(data);
     //first clear the previous elements from any other searches
     $("#cityname-header").empty();
     $("span").empty();
 
-    //now insert the city name and country
+    //insert the city name and country
     var cityName = $("<h2>")
-        .text("City of: " + cityNameAPI + ", " + country + " (" + currentDate + ")");
+        .text("City of: " + cityNameAPI + ", " + country + " (" + dateHandler(0) + ")");
     $("#cityname-header").append(cityName);
 
     //TEMPERATURE
@@ -125,5 +133,40 @@ function renderData(data) {
     var uvIndex = $("<span>")
         .text("UV Index: " + data.current.uvi);
     $("#uvindex").append(uvIndex);
+
+    //---------FIVE DAY PREDICTION STARTS HERE--------
+
+    for (var i = 1; i < 6; i++) {
+        //header for the prediction cards
+        var dayCardHolder = "#day" + [i];
+        var cardHeader = $(dayCardHolder);
+
+        var daysAhead = dateHandler(i);
+        var cardHeaderEl = $("<div>")
+            .addClass("card-header bg-dark text-light text-center w-100")
+            .text(daysAhead);
+
+        //body for the prediction cards
+        //TEMPERATURE
+        var tempCardBodyEl = $("<div>")
+            .addClass("card-body border-left border-right border-bottom")
+            .text("Temp: " + data.daily[i].temp.day);
+
+        //WIND SPEED
+        var windCardBodyEl = $("<div>")
+            .text("Wind: " + data.daily[i].wind_speed);
+
+        //HUMIDITY
+        var humidityCardBodyEl = $("<div>")
+            .text("Humidity: " + data.daily[i].humidity);
+
+        //creation of the prediction cards
+        cardHeader.append(cardHeaderEl);
+        tempCardBodyEl.append(windCardBodyEl).append(humidityCardBodyEl);
+        cardHeader.append(tempCardBodyEl);
+
+
+
+    }
 
 };
