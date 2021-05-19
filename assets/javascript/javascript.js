@@ -10,7 +10,7 @@ $("#searchbtn").on("click", function () {
 function apiSearch() {
     var searchBox = $("#citysearch").val();
     //fetch the API with the city name taken from the text input box
-    fetch("http://api.openweathermap.org/data/2.5/weather?q=" + searchBox + "&appid=2fd9f6120b1e5e49f6b0893e50ef57f6")
+    fetch("http://api.openweathermap.org/data/2.5/weather?q=" + searchBox + "&units=imperial&appid=2fd9f6120b1e5e49f6b0893e50ef57f6")
         .then(function (response) {
             //check if there is a response then json the data and send it to be processed
             if (response.ok) {
@@ -104,7 +104,7 @@ function dateHandler(days) {
 
 //function to render the current and predicted weather data to index.html
 function renderData(data) {
-    console.log(data);
+
     //first clear the previous elements from any other searches
     $("#cityname-header").empty();
     $("span").empty();
@@ -147,6 +147,12 @@ function renderData(data) {
             .text(daysAhead);
 
         //body for the prediction cards
+        
+        //ICON
+        var weatherIconPNG = data.daily[i].weather;
+        var weatherIconEl = $("<img>")
+        .attr("src", "http://openweathermap.org/img/wn/" + weatherIconPNG[0].icon + "@2x.png");
+
         //TEMPERATURE
         var tempCardBodyEl = $("<div>")
             .addClass("card-body border-left border-right border-bottom")
@@ -161,6 +167,7 @@ function renderData(data) {
             .text("Humidity: " + data.daily[i].humidity);
 
         //creation of the prediction cards
+        cardHeaderEl.append(weatherIconEl);
         cardHeader.append(cardHeaderEl);
         tempCardBodyEl.append(windCardBodyEl).append(humidityCardBodyEl);
         cardHeader.append(tempCardBodyEl);
