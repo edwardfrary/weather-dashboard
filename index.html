@@ -34,13 +34,16 @@
                     </h2>
                 </div>
 
-                <!--SEARCH BOX & BUTTON-->
+                <!--SEARCH BOX, BUTTON & CLEAR-->
                 <div>
                     <input type="text" id="citysearch" class="w-100 rounded"></input>
                 </div>
                 <div id="searchbtncontainer" class="border border-bottom-1">
                     <button type="submit" id="searchbtn"
                         class="btn-block bg-dark text-light shadow w-100">SEARCH</button>
+                </div>
+                <div id = "clearbtncontainer">
+                    <button id="clearbtn" class="btn-block btn-warning text-black shadow w-100" onclick="clearHistory()">CLEAR HISTORY</button>
                 </div>
                 <!--PREVIOUS SEARCHES-->
                 <hr>
@@ -65,7 +68,7 @@
                     </div>
                     <hr>
                     <!--FIVE DAY FORCAST-->
-                    <div class="row">
+                    <div class="row" id ="prediction-row">
                         <div class="col-md-12 col-lg-2" id="day1"></div>
                         <div class="col-md-12 col-lg-2" id="day2"></div>
                         <div class="col-md-12 col-lg-2" id="day3"></div>

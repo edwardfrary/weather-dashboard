@@ -3,3 +3,11 @@ hr {
     border-top:solid black;
     border-width: 3px;
 }
+
+.text-orange {
+    color:orange;
+}
+
+.text-violet {
+    color:violet;
+}
