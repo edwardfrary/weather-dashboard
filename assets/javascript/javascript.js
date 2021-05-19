@@ -11,7 +11,7 @@ $("#searchbtn").on("click", function () {
 function apiSearch() {
     var searchBox = $("#citysearch").val();
     //fetch the API with the city name taken from the text input box
-    fetch("http://api.openweathermap.org/data/2.5/weather?q=" + searchBox + "&units=imperial&appid=2fd9f6120b1e5e49f6b0893e50ef57f6")
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + searchBox + "&units=imperial&appid=2fd9f6120b1e5e49f6b0893e50ef57f6")
         .then(function (response) {
             //check if there is a response then json the data and send it to be processed
             if (response.ok) {
@@ -37,7 +37,7 @@ function apiSearch() {
 //function to handle clicking a button of a previous search to fetch an api
 function apiBtn(savedCity) {
     //fetch the API with the saved city name
-    fetch("http://api.openweathermap.org/data/2.5/weather?q=" + savedCity + "&units=imperial&appid=2fd9f6120b1e5e49f6b0893e50ef57f6")
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + savedCity + "&units=imperial&appid=2fd9f6120b1e5e49f6b0893e50ef57f6")
         .then(function (response) {
             //check if there is a response then json the data and send it to be processed
             if (response.ok) {
